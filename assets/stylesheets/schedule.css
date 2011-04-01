@@ -6,6 +6,7 @@
 .schedule table tr, #schedule table td {width:100%;padding:.2em; margin:0;}
 .schedule table td.date {color:black;padding:.2em;padding-top:0;padding-left:.5em; width:5em;}
 .schedule table td.class-name {color:black; padding:.2em;padding-left:.5em;  border-left:1px solid #d6d6d6;}
+.schedule table td.class-name span a {font-size:90%; font-style:italic;
 .schedule .even {background:#f7f7f7;}
 .schedule .odd {background:white;}
 .schedule table th{border-bottom:1px solid #d6d6d6; background:url(/plugin_assets/victory_gyms_franchisee/images/schedule-header-bg.png) repeat-x;}
