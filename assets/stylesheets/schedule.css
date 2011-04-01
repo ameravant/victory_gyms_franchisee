@@ -1,6 +1,6 @@
 .schedule {background:#dadada; padding:.5em; border:1px solid gray;}
 .schedule h1 {color:#961712; font-size:1.2em;}
-.schedule h1 a { float:right; border:none; text-decoration:none; font-size:80%; color:#053f6d;}
+#side-column .schedule h1 a { float:right; border:none; text-decoration:none; font-size:80%; color:#053f6d;}
 .schedule table {width:100%; border:1px solid #d6d6d6; background:#fefefe; border-top:3px solid #d6d6d6;}
 .schedule table tr.header{border-bottom:1px solid #d6d6d6; color:black;}
 .schedule table tr, #schedule table td {width:100%;padding:.2em; margin:0;}
