@@ -4,7 +4,7 @@
     = link_to "View All", "/class-schedule" unless @page.permalink == "class-schedule"
   %table
     %tr.header
-      %th.time Time
+      %th.time Date/Time
       %th.class-name Class Name
     - for event in events
       %tr.top-row[event]{ :class => cycle('odd','even') }

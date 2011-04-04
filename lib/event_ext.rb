@@ -18,10 +18,11 @@ module EventExt
   
   module InstanceMethods
     def format_time_for_schedule
-      if self.date_and_time.strftime("%H").to_i > 12
-        (self.date_and_time.strftime("%H").to_i - 12).to_s + ":#{self.date_and_time.strftime('%M')} PM"
+      time = self.date_and_time
+      if time.strftime("%H").to_i > 12
+        time.strftime("%b %d") + " - " + (time.strftime("%H").to_i - 12).to_s + ":#{time.strftime('%M')} PM"
       else
-        self.date_and_time.strftime("%H:%M") + " AM"
+        time.strftime("%b %d") + " - " + time.strftime("%H:%M") + " AM"
       end
     end
   end
