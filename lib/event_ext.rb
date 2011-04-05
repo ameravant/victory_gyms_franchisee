@@ -20,7 +20,7 @@ module EventExt
     def format_time_for_schedule
       time = self.date_and_time
       if time.strftime("%H").to_i > 12
-        (time.strftime("%H").to_i - 12).to_s + ":#{time.strftime('%M')} PM"
+        time.strftime("%b %d") + " - " + (time.strftime("%H").to_i - 12).to_s + ":#{time.strftime('%M')} PM"
       else
         time.strftime("%b %d") + " - " + time.strftime("%H:%M") + " AM"
       end
