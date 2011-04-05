@@ -20,13 +20,15 @@ module EventExt
     def format_time_for_schedule
       time = self.date_and_time
       if time.strftime("%H").to_i > 12
-        time.strftime("%b %d") + " - " + (time.strftime("%H").to_i - 12).to_s + ":#{time.strftime('%M')} PM"
+        (time.strftime("%H").to_i - 12).to_s + ":#{time.strftime('%M')} PM"
       else
         time.strftime("%b %d") + " - " + time.strftime("%H:%M") + " AM"
       end
     end
   end
-  
+  def format_time_for_schedule_without_date
+    self.format_time_for_schedule.gsub(/^.* - /, "")
+  end
 end
 ActiveRecord::Base.send(:include, EventExt)
 Event.send(:event_extra_methods)
