@@ -9,5 +9,5 @@
       - unless params[:search].blank?
         = link_to "clear search", request.path
   %br.clear
-=render :partial => "events/schedule_for_side_column", :locals => {:events => @person.events.find_for_days_from_now(14), :title => "#{@person.name}'s Classes"} if @person
+=render :partial => "events/schedule_for_side_column", :locals => {:events => @person.events.find_for_next_number_of_days(14), :title => "#{@person.name}'s Classes"} if @person
 =render :partial => "profile_session_form"
