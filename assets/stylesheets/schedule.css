@@ -16,4 +16,5 @@ ul.class-schedule li {width:31%;margin:.3em;float:left;list-style-type:none;}
 ul.class-schedule {width:100%; margin:0; padding:0;float:left; clear:left;}
 .schedule table td a {text-decoration:none;}
 .schedule table td.class-name a {font-weight:bold;}
+.schedule table td.class-name span a{font-weight:normal;}
 .schedule table td a:hover{text-decoration:underline;}
