@@ -5,7 +5,7 @@
   %table
     %tr.header
       %th.time 
-        ="Date/" if @page.permalink == "home"
+        ="Date/" unless @page.permalink == "home"
         Time
       %th.class-name Class Name
     - for event in events
