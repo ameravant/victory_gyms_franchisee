@@ -9,7 +9,7 @@ module EventExt
       find(:all, :conditions => ["date_and_time > ? and date_and_time < ?", (int.send(:day).from_now.strftime("%y-%m-%d") + " 00:00:00").to_time, (int.send(:day).from_now.strftime("%y-%m-%d") + " 23:59:59").to_time])
     end
     def find_for_next_number_of_days(int)
-      find(:all, :conditions => ["date_and_time > ? and date_and_time < ?", Time.now.strftime("%y-%m-%d"), (int.send(:day).from_now.strftime("%y-%m-%d")])
+      find(:all, :conditions => ["date_and_time > ? and date_and_time < ?", Time.now.strftime("%y-%m-%d"), int.send(:day).from_now.strftime("%y-%m-%d")])
     end
     def event_extra_methods
       belongs_to :instructor, :class_name => 'Person'
