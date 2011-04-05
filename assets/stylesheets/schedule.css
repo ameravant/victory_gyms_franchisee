@@ -1,8 +1,6 @@
 .schedule {background:#dadada; padding:.5em; border:1px solid gray;}
 .schedule h1 {color:#961712; font-size:1.2em;}
-#side-column .schedule td a {text-decoration:underline;}
 #side-column .schedule h1 a { float:right; border:none; text-decoration:none; font-size:80%; color:#053f6d; text-decoration:none;}
-#side-column .schedule td a:hover{text-decoration:underline;}
 .schedule table {width:100%; border:1px solid #d6d6d6; background:#fefefe; border-top:3px solid #d6d6d6;}
 .schedule table tr.header{border-bottom:1px solid #d6d6d6; color:black;}
 .schedule table tr, #schedule table td {width:100%;padding:.2em; margin:0;}
@@ -16,3 +14,5 @@
 .schedule table td.class-name a {border:none; color:black; line-height:1.2em;}
 ul.class-schedule li {width:31%;margin:.3em;float:left;list-style-type:none;}
 ul.class-schedule {width:100%; margin:0; padding:0;float:left; clear:left;}
+#side-column .schedule table td.class-name a {text-decoration:none;}
+#side-column .schedule td.class-name a:hover{text-decoration:underline;}
