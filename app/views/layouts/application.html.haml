@@ -23,6 +23,7 @@
         });
     - else
       = javascript_include_tag "/plugin_assets/siteninja_core/javascripts/jquery.tools.min.js"
+    = javascript_include_tag "/plugin_assets/siteninja_core/javascripts/cookie.js" if @cookie
     - # noConflict makes jQuery play nicely with Prototype
     = javascript_tag "jQuery.noConflict();"
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? # Enable jQuery to asyncronously call the app
@@ -49,22 +50,26 @@
       = javascript_include_tag "/plugin_assets/siteninja_store/javascripts/jquery.formatCurrency-1.3.0.min.js"  
     - if logged_in? # admin is logged in
       = stylesheet_link_tag "/plugin_assets/siteninja_core/stylesheets/admin_menu.css"
-      - # Textile includes are commented out until implemented
-      - # = javascript_include_tag "markitup/jquery.markitup"
-      - # = javascript_include_tag "markitup/sets/textile/set"
-      - # = stylesheet_link_tag "/javascripts/markitup/skins/markitup/style.css"
-      - # = stylesheet_link_tag "/javascripts/markitup/sets/textile/style.css"
-      - if @admin # only needed if in the CMS admin sections
-        = stylesheet_link_tag "/plugin_assets/siteninja_core/stylesheets/admin.css"
-        = stylesheet_link_tag "/plugin_assets/siteninja_galleries/stylesheets/admin_galleries.css"
-        = include_tiny_mce_if_needed
       - if current_user
         <!--[if lt IE 8]>
         %style{:tyle => "text/css"}
           div#admin-menu { background: #333 !important; position: relative; }
           div#top-margin { height: 70px; }
         <![endif]--> 
-    - unless @settings.stylesheet.blank?
+    - if @tmplate
+      - if !@tmplate.stylesheet.blank?
+        = stylesheet_link_tag "/templates/#{@tmplate.id}/stylesheet.css"
+      - elsif !@settings.stylesheet.blank?
+        = stylesheet_link_tag "/stylesheet.css"
+      -else
+        - unless session[:template]
+          = stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{@cms_config['website']['template']}"
+        - else
+          - unless session[:template]
+            = stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{@cms_config['website']['template']}"
+          - else
+            = stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{session[:template]}"
+    - elsif !@settings.stylesheet.blank?
       -if controller_name == "sessions"
         %style{:type => "text/css"}
           = @settings.stylesheet
@@ -72,12 +77,16 @@
         = stylesheet_link_tag "/stylesheet.css"
     - else
       - unless session[:template]
-        = #stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{@cms_config['website']['template']}"
-        = stylesheet_link_tag "victorygyms"
+        = stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{@cms_config['website']['template']}"
       - else
         = stylesheet_link_tag "/plugin_assets/siteninja_core/templates/#{session[:template]}"
-    = stylesheet_link_tag "/stylesheet/additional_styles.css" unless @settings.additional_styles.blank?
-    
+    - if @tmplate
+      - if !@tmplate.additional_styles.blank?
+        = stylesheet_link_tag "/templates/#{@tmplate.id}/additional_styles.css"
+      - elsif !@settings.additional_styles.blank?
+        = stylesheet_link_tag "/stylesheet/additional_styles.css"
+    - elsif !@settings.additional_styles.blank?
+      = stylesheet_link_tag "/stylesheet/additional_styles.css"
     - # Include galleryview for slideshow if one is used.
     - if @slideshow
       = stylesheet_link_tag "/plugin_assets/siteninja_core/jquery-galleryview-3.0b3/css/jquery.galleryview-3.0.css"
@@ -115,7 +124,6 @@
         Event.observe(window, 'load', function() {
         = yield :onload
         });
-
   %body{:id => (@admin ? "admin" : "public")}
     = #debug Draft.first
     - #parsed_json = ActiveSupport::JSON.decode(Draft.first.draft_fields)
@@ -147,10 +155,19 @@
                     = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/youtube-button.gif", :alt => "YouTube"), "http://www.youtube.com/throwdownelitesd")
 
                   = clear if @admin
-                - if !@settings.header_right_file_name.blank? and !@admin
+                - if @tmplate
+                  - if !@tmplate.header_right_file_name.blank?
+                    #header-right
+                      = link_to(image_tag(@tmplate.header_right(:original), :alt => @cms_config['website']['name'], :title => @cms_config['website']['name']), @tmplate.header_right_url)
+                - elsif !@settings.header_right_file_name.blank? and !@admin
                   #header-right
                     = link_to(image_tag(@settings.header_right(:original), :alt => @cms_config['website']['name'], :title => @cms_config['website']['name']), @settings.header_right_url)
-                - if !@settings.header_text.blank?
+                - if @tmplate
+                  - if !@tmplate.header_text.blank?
+                    = @tmplate.header_text
+                  -elsif !@settings.header_text.blank?
+                    = @settings.header_text
+                - elsif !@settings.header_text.blank?
                   = @settings.header_text
                   = #@settings.header_text.gsub(/\#{ (.{0,}?) }/m) {|x| eval($1)}
           = render :partial => "/layouts/menu" unless @admin
