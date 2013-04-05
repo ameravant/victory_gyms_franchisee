@@ -112,23 +112,28 @@ module ApplicationHelper
       # Output the list elements for these children, and recursively
       # call build_menu for their children.
       for child in children
-        concat "<li>"
-        case child.navigatable.permalink
-        when "blog"
-          concat link_to @cms_config['site_settings']['blog_title'], "/#{path_safe(@cms_config['site_settings']['blog_title'])}"
-        when "events"
-          concat link_to @cms_config['site_settings']['events_title'], "/#{path_safe(@cms_config['site_settings']['events_title'])}"
-        when "links"
-          concat link_to @cms_config['site_settings']['links_title'], "/#{path_safe(@cms_config['site_settings']['links_title'])}"
-        else
-          if child.navigatable_type == "Page"
-            concat link_to child.navigatable.title, "/#{child.navigatable.permalink}"
+        begin
+          concat "<li>"
+          case child.navigatable.permalink
+          when "blog"
+            concat link_to @cms_config['site_settings']['blog_title'], "/#{path_safe(@cms_config['site_settings']['blog_title'])}"
+          when "events"
+            concat link_to @cms_config['site_settings']['events_title'], "/#{path_safe(@cms_config['site_settings']['events_title'])}"
+          when "links"
+            concat link_to @cms_config['site_settings']['links_title'], "/#{path_safe(@cms_config['site_settings']['links_title'])}"
           else
-            concat link_to child.navigatable.title, child.navigatable
+            if child.navigatable_type == "Page"
+              concat link_to child.navigatable.title, "/#{child.navigatable.permalink}"
+            else
+              concat link_to child.navigatable.title, child.navigatable
+            end
           end
+          build_dropdown_menu(child.id)
+          concat "</li>"
+        rescue
+          
         end
-        build_dropdown_menu(child.id)
-        concat "</li>"
+        
       end
       concat "</ul>\n"
     end
