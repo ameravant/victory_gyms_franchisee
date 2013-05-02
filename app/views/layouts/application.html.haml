@@ -203,10 +203,10 @@
                   = render :partial => "/layouts/footer_menu"
                   = clear
                   #footer-links
-                    = link_to(image_tag("http://s3.amazonaws.com/siteninja/sandiego-victorygyms-com/1365190753/original/vgymsgplus.gif", :alt => "Google Plus"), "https://plus.google.com/108258190308396288790#+VictoryMMAandFitness")
-                    = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/facebook-button.gif", :alt => "Facebook"), "http://www.facebook.com/victorygyms")
-                    = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/twitter-button.gif", :alt => "Twitter"), "http://www.twitter.com/VictoryMMASD")
                     = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/youtube-button.gif", :alt => "YouTube"), "http://www.youtube.com/user/victorymmasandiego")
+                    = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/twitter-button.gif", :alt => "Twitter"), "http://www.twitter.com/VictoryMMASD")
+                    = link_to(image_tag("/plugin_assets/victory_gyms_franchisee/images/facebook-button.gif", :alt => "Facebook"), "http://www.facebook.com/victorygyms")
+                    = link_to(image_tag("http://s3.amazonaws.com/siteninja/sandiego-victorygyms-com/1365190753/original/vgymsgplus.gif", :alt => "Google Plus"), "https://plus.google.com/108258190308396288790#+VictoryMMAandFitness")
                   #footer_credits
                     = @settings.footer_text.gsub('#YEAR#', Date.today.year.to_s)
 
